@@ -43,4 +43,33 @@ php artisan serve
 There are some common directories 
 - 1 Inside **Routes** folder have **web.php** file where all routes are write ans manage
 - 2 In **Resource/views** folder we can put all view or HTML file
-- 3 In **Public** folder we can put CSS, JS files and other assest like Images and etc 
+- 3 In **Public** folder we can put CSS, JS files and other assest like Images and etc
+
+### [Blade Template](https://laravel.com/docs/11.x/blade#main-content)
+ - `{{ data }}` use for display variable data
+ - `{!! data !!}` use for same but it prevent XSS attack
+
+### Blade Directives
+- `@` symbol use for define directive like `@if`, `@foreach` etc
+- dont need to write `<?php ?>` for write php code in html
+
+### [Database Migrations](https://laravel.com/docs/11.x/migrations)
+
+Few migration command whih are frequently use
+1. Create migartion
+   ` php artisan migrate `
+2. Rollback migration
+   `php artisan migrate:rollback`
+3. Create table in DB
+    `php artisan make:migration create_tableName_tabel`
+4. Delete all table and re create
+   `php artisan migrate:fresh`
+5. Perfome task in db
+    `php artisan tinker`
+6. Create model
+    `php artisan make:mode ModelName`
+7. Create factory
+    `php artisan make:factory factoryName`
+8. Insert fake data into db
+   `php artisan db:seed`
+
