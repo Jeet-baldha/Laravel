@@ -10,7 +10,7 @@
                 {{$post->category->name}} </a></p>
         <p>{{$post->excerpt}}</p>
 
-
+        <p><a href="/">Go Back</a></p>
     </div>
 
 @endforeach
