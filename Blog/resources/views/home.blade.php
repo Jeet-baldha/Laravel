@@ -1,17 +1,27 @@
-@extends("layout")
-
-@section("content")
-
-@foreach ($posts as $post)
-    <div class="container">
-        <h1><a href="/post/{{$post->slug}}">{{$post->title}}</a></h1>
-        <p> Written by <a href="/author/{{$post->author->username}}">{{$post->author->name}}</a> in <a
-                href="/category/{{$post->category->slug}}">
-                {{$post->category->name}} </a></p>
-        <p>{{$post->excerpt}}</p>
+<x-layout>
 
 
-    </div>
+    @include('_post-header')
 
-@endforeach
-@endsection
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+
+        @if ($posts->count())
+
+            <x-post-features-card :post="$posts[0]" />
+        @endif
+
+
+        <div class="lg:grid lg:grid-cols-6">
+            @foreach ($posts->skip(1) as $post)
+                <x-post-card :post="$post" class="{{ $loop->iteration < 3 ? 'col-span-3' : 'col-span-2'}}" />
+            @endforeach
+
+        </div>
+
+        <div class="lg:grid lg:grid-cols-3">
+
+        </div>
+    </main>
+
+</x-layout>
