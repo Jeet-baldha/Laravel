@@ -55,7 +55,7 @@ There are some common directories
 
 ### [Database Migrations](https://laravel.com/docs/11.x/migrations)
 
-Few migration command whih are frequently use
+Few migration command which are frequently use
 1. Create migartion
    ` php artisan migrate `
 2. Rollback migration
@@ -72,4 +72,53 @@ Few migration command whih are frequently use
     `php artisan make:factory factoryName`
 8. Insert fake data into db
    `php artisan db:seed`
+
+-- **Note** factory name and class name must be same with suffix Factory and in Model class define *HasFactory* method
+
+
+- Migration use for DB mangment and mange table
+- **App\Model\TableClass** file define db table schema and relation with other table
+- Factory use for seed data into DB
+- Using `db:seed` command insert data into DB or also use when DB fresh ans insert to new data `php artisan migrate:fresh --seed` this command drop all table and create new and insert data
+
+### [Laravel Component](https://laravel.com/docs/11.x/blade#components)
+- Component is part of blade template
+- Simplest method to create component is just create new directory in **resource/view** and create blade file
+- Now you can use this component in any view file using **&lt;x-componentName&gt;**
+- For pass data into comopoenet use prop **&lt;x-componentName :data="$data" &gt;**
+- <pre>
+  &lt;x-layout&gt;
+    some html code
+  &lt;/x-layout&gt;
+</pre>
+it is use for layout webpage but need to write `{{ $data }}` it is defualt variable for pass other html content
+
+### [Controllers](https://laravel.com/docs/11.x/controllers#main-content)
+- In controller we write all request handle logic in controller file 
+- For create component
+  ```
+  php artisan make:controller controllername
+  ```
+- Pass controller in route request
+  <pre>
+    Route::get('/', [PostController::class, 'index']);
+  </pre>
+  here index is separate logic for request
+- Example
+  <pre>
+        public function index()
+    {
+        $posts = Post::latest();
+
+        if (request('search')) {
+            $posts->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%');
+        }
+        return view('home', [
+            'posts' => $posts->get(),
+            'categories' => Category::all()
+        ]);
+    }
+  </pre>
+  it is simple logic for search functionality
 
