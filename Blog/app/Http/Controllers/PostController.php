@@ -12,15 +12,16 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest();
+        $posts = Post::latest()->filter()->paginate(6);
 
-        if (request('search')) {
-            $posts->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%');
-        }
-        return view('home', [
-            'posts' => $posts->get(),
-            'categories' => Category::all()
+        return view('posts.index', [
+            'posts' => $posts,
+
         ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view("posts.show", ['post' => $post]);
     }
 }

@@ -21,19 +21,19 @@ class DatabaseSeeder extends Seeder
         // Post::truncate();
         // Category::truncate();
 
-        $user = User::factory()->create(
-            [
-                "name" => "Jeet Baldha",
-                "username" => "jeet_baldha"
+        // $user = User::factory()->create(
+        //     [
+        //         "name" => "Jeet Baldha",
+        //         "username" => "jeet_baldha"
 
-            ]
-        );
+        //     ]
+        // );
 
-        Post::factory(5)->create(
-            [
-                "user_id" => $user
-            ]
-        );
+        // Post::factory(5)->create(
+        //     [
+        //         "user_id" => $user
+        //     ]
+        // );
 
 
         // Category::create([

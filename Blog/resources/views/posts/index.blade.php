@@ -1,7 +1,7 @@
 <x-layout>
 
 
-    @include('_post-header')
+    @include('posts._header')
 
 
     <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
@@ -18,10 +18,7 @@
             @endforeach
 
         </div>
-
-        <div class="lg:grid lg:grid-cols-3">
-
-        </div>
+        {{$posts->links()}}
     </main>
 
 </x-layout>
