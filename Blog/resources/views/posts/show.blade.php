@@ -39,7 +39,7 @@
                     </a>
 
                     <div class="space-x-2">
-                        <a href="?category={{$post->category->slug}}"
+                        <a href="/?category={{$post->category->slug}}"
                             class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
                             style="font-size: 10px">{{$post->category->name}}</a>
 
@@ -54,6 +54,35 @@
 
                     <p>{!!$post->body!!}</p>
                 </div>
+            </div>
+            <div class=" col-span-8 col-start-5 mt-10 space-y-6">
+                @auth
+                    <div class=" bg-gray-100 border border-gray-200 p-5 rounded-xl">
+                        <div class="flex items-center">
+                            <img class="rounded-full" src="https://i.pravatar.cc/60?id={{auth()->user()->id}}" width="40"
+                                height="40">
+                            <h3 class="ml-4 text-xl">Do you want to add somthing?</h3>
+                        </div>
+                        <div>
+                            <form method="Post" action="/post/{{$post->slug}}/comment" class="mb-0 mt-4">
+                                @csrf
+                                <textarea class=" w-full border border-gray-200 p-2 " rows="3" name="body" required
+                                    placeholder="share your thought.."></textarea>
+                                <div class=" flex justify-end  mt-4 ">
+
+                                    <button
+                                        class="rounded-2xl px-5 py-1 text-md font-bold bg-blue-400 text-white hover:bg-blue-500">Post</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endauth
+
+                @foreach ($post->comment as $comment)
+
+                    <x-post-comment :comment="$comment"></x-post-comment>
+                @endforeach
+
             </div>
         </article>
     </main>
