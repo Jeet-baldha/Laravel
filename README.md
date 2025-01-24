@@ -122,3 +122,60 @@ it is use for layout webpage but need to write `{{ $data }}` it is defualt varia
   </pre>
   it is simple logic for search functionality
 
+### [DB Query](https://laravel.com/docs/11.x/queries#main-content)
+
+- ` ModelName->all() ` get all data from tabel
+- ` ModelName->where('columnName','matchData') ` find specific row from tabel
+
+## Table Relation
+- In Model class write function with realtion name and return relation between two table
+    <pre>
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    </pre>
+    pass model class which has relaton with this table, in this code category is relation, if i wanto get category of post just write post->category
+  
+  - One to one `belogsTo`
+  - One to many `hasMany`
+  - Many to many `belogsToMany`
+ 
+### [N + 1 query issue](https://medium.com/@moumenalisawe/n-1-query-problem-in-laravel-causes-effects-and-solutions-740cefa44306)
+- N + 1 query problem occur when two tabel have realtion and we want to get data using Post->all() it run N + 1 query 1 for post and N quries for category
+ <pre>
+   1 - select * from posts
+   N - select * from categories where id = ''
+ </pre>
+- For solve this we need to use `with()` method just pass table name as parameter which you want it reduce number of query from N + 1 to  2
+<pre>
+    1 - select * from posts
+    2 - select * from categories where id in(1,2,3,..)
+</pre>
+
+### Pagination
+- In laravel pagination is very easy just use `paginate($n)` method and here n is number of data per page
+
+### Session and Authentication
+- Laravel provide inbuilt method to mange authentication `auth()`
+- ` auth()->login() `
+- ` auth()->logout() `
+- ` session('key','data') ` for store data in session variable
+
+### Form validation
+
+- Using ` request() ` you get all request body data
+- ` request()->validate([]) ` method for validation and is has some pre build rules
+  <pre>
+    request()->validate(
+            [
+                'name' => 'required',
+                'username' => 'required|max:255|min:4|unique:users,username',
+                'email' => 'required|email|max:255|unique:users,email',
+                'password' => 'required'
+            ]
+        );
+  </pre>
+- And insert data into table just write $post->create(request())
+
+  
