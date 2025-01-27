@@ -59,19 +59,19 @@ Few migration command which are frequently use
 1. Create migartion
    ` php artisan migrate `
 2. Rollback migration
-   `php artisan migrate:rollback`
+   ` php artisan migrate:rollback `
 3. Create table in DB
-    `php artisan make:migration create_tableName_tabel`
+    ` php artisan make:migration create_tableName_tabel `
 4. Delete all table and re create
-   `php artisan migrate:fresh`
+   ` php artisan migrate:fresh `
 5. Perfome task in db
-    `php artisan tinker`
+    ` php artisan tinker `
 6. Create model
     `php artisan make:mode ModelName`
 7. Create factory
-    `php artisan make:factory factoryName`
+    ` php artisan make:factory factoryName `
 8. Insert fake data into db
-   `php artisan db:seed`
+   ` php artisan db:seed `
 
 -- **Note** factory name and class name must be same with suffix Factory and in Model class define *HasFactory* method
 
@@ -165,7 +165,7 @@ it is use for layout webpage but need to write `{{ $data }}` it is defualt varia
 ### Form validation
 
 - Using ` request() ` you get all request body data
-- ` request()->validate([]) ` method for validation and is has some pre build rules
+- ` request()->validate([]) ` method for validation and it has some pre build rules
   <pre>
     request()->validate(
             [
@@ -178,4 +178,11 @@ it is use for layout webpage but need to write `{{ $data }}` it is defualt varia
   </pre>
 - And insert data into table just write $post->create(request())
 
+
+### File Upload
+ - Submit form with encrypt=multipart/form-data
+ - Get file with request method `` request()->file(name) ``
+ - And for save file in server just add one more method store `` request()->file(name)->store(foldername) ``
+ - File will be save in **stoarage/app/private/foldername/filename**
+ - If you want to save file in public then go to **config/filesystem.php** and change defualt disk local to public and also change in .env file FILESYSTEM_DISK=public
   
