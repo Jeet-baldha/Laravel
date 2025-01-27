@@ -8,6 +8,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
@@ -15,6 +16,7 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('thumbnail')->nullable();
             $table->string('title');
             $table->text('excerpt');
             $table->text('body');
