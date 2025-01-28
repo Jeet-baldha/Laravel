@@ -185,4 +185,13 @@ it is use for layout webpage but need to write `{{ $data }}` it is defualt varia
  - And for save file in server just add one more method store `` request()->file(name)->store(foldername) ``
  - File will be save in **stoarage/app/private/foldername/filename**
  - If you want to save file in public then go to **config/filesystem.php** and change defualt disk local to public and also change in .env file FILESYSTEM_DISK=public
+
+### Custom middleware
+
+```
+php atrisan make:middleware MiddleWareName
+```
+
+- Write logic in **App/Http/Middleware/MiddlewareName.php** file
+- For use in specific route ``  Route::get('admin/dashboard', [AdminPostController::class, 'index'])->middleware(MiddlewareName::class); ``
   
