@@ -18,11 +18,38 @@
 
             <div class="flex items-center mt-8 md:mt-0">
                 @auth
+                    <div x-data="{show:false}" class="" style="dislplay:none">
+
+                        <button @click=" show = !show" class=" px-3 py-2 font-semibold text-sm flex w-full "
+                            @click.away="show=false">
+                            <span class="text-xs font-bold uppercase">Welcom back! {{auth()->user()->name}}</span>
+                        </button>
+
+                        <div x-show="show"
+                            class="absolute  bg-gray-100 text-left mt-2 rounded-xl z-10 text-sm py-2     overflow-auto ">
+
+                            @can('admin')
+
+                                <a class="block hover:bg-blue-400 focus:bg-blue-400 hover:text-white cursor-pointer px-3 py-1 {{request()->is('admin/dashboard') ? 'bg-blue-500 text-white' : ''}}"
+                                    href="/admin/dashboard">
+                                    Dashboard</a>
+                                <a class="block hover:bg-blue-400 focus:bg-blue-400 hover:text-white cursor-pointer px-3 py-1 {{request()->is('admin/post/create') ? 'bg-blue-500 text-white' : ''}}"
+                                    href="/admin/post/create">
+                                    Add Post</a>
+                            @endcan
+                            <button
+                                class="text-left w-full hover:bg-blue-400 focus:bg-blue-400 hover:text-white cursor-pointer px-3 py-1"
+                                @click.prevent="document.querySelector('#logoutForm').submit()">
+                                Logout</button>
+
+
+                        </div>
+                    </div>
                     <div class=" flex items-center ">
-                        <span class="text-xs font-bold uppercase">Welcom back! {{auth()->user()->name}}</span>
-                        <form method="POST" action="/logout" class=" mb-0">
+
+                        <form id="logoutForm" method="POST" action="/logout" class=" mb-0">
                             @csrf
-                            <button class="text-xs font-bold uppercase ml-6 text-blue-400 " type="submit">Logout</button>
+
                         </form>
                     </div>
                 @else
