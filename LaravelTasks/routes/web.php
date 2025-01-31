@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class, 'index']);
 
 Route::get('users/{user}/delete', [UserController::class, 'delete']);
+Route::get('users/{user}/edit', [UserController::class, 'edit']);
+Route::patch("users/{user}/edit", [UserController::class, 'update']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

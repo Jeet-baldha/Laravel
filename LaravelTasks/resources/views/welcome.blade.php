@@ -20,6 +20,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="">
@@ -56,6 +57,7 @@
         {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     </div>
 
+    <x-flash-message></x-flash-message>
 </body>
 
 

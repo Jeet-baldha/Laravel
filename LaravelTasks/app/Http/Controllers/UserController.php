@@ -14,9 +14,27 @@ class UserController extends Controller
         return $dataTable->render('welcome');
     }
 
+    public function edit(User $user)
+    {
+        return view('users.edit', [
+            "user" => $user
+        ]);
+    }
+
+    public function update(User $user)
+    {
+        $attr = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $user->update($attr);
+
+        return redirect('/')->with('success', "User data has been Updated");
+    }
     public function delete(User $user)
     {
         $user->delete();
-        return back();
+        return back()->with('success', 'User data has been deleted');
     }
 }

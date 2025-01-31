@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-
+use Carbon\Carbon;
 class UsersDataTable extends DataTable
 {
     /**
@@ -28,6 +28,13 @@ class UsersDataTable extends DataTable
             ->addColumn('delete', function ($row) {
                 return '<a href="/users/' . $row->id . '/delete" class="btn btn-danger">Delete</a>';
             })
+            ->editColumn('created_at', function ($data) {
+                return $data->created_at->toDayDateTimeString();
+            })
+            ->editColumn('updated_at', function ($data) {
+                return $data->updated_at->toDayDateTimeString();
+            })
+            ->setRowId('id')
             ->rawColumns(['edit' => 'edit', 'delete' => 'delete']);
 
     }
@@ -72,13 +79,11 @@ class UsersDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('email'),
-
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('edit')
                 ->width(60),
-
             Column::computed('delete')
-                ->exportable(false)
-                ->printable(false)
                 ->width(60)
 
         ];
