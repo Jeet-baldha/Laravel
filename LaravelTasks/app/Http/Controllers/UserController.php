@@ -11,7 +11,33 @@ class UserController extends Controller
 {
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('welcome');
+        return $dataTable->render('users.index');
+    }
+
+    public function home()
+    {
+        return view('welcome');
+    }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store()
+    {
+        $attr = request()->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8'
+
+        ]);
+
+        $user = User::create($attr);
+
+        return redirect('/users')->with('success', 'New user added :' . $user->full_name);
+
     }
 
     public function edit(User $user)
@@ -24,13 +50,14 @@ class UserController extends Controller
     public function update(User $user)
     {
         $attr = request()->validate([
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email'
         ]);
 
         $user->update($attr);
 
-        return redirect('/')->with('success', "User data has been Updated");
+        return redirect('/users')->with('success', "User data has been Updated");
     }
     public function delete(User $user)
     {

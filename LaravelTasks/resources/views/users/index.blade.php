@@ -52,11 +52,16 @@
         @endif
     </header>
 
-    <div class=" mx-auto">
-        <h1 class=" mx-auto">Welcome to laravel first page</h1>
+    <div class=" px-10">
+        <div class="my-2">
+            <a class=" text-white bg-blue-400 hover:bg-blue-500 hover:cursor-pointer font-bold px-2 py-2 rounded outline-none border-none hover:no-underline   "
+                href="/users/create">+ Add User</a>
+        </div>
+        {{ $dataTable->table() }}
+        {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     </div>
 
-
+    <x-flash-message></x-flash-message>
 </body>
 
 

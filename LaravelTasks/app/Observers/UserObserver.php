@@ -32,7 +32,7 @@ class UserObserver
     }
 
     /**
-     * Handle the User "restored" event.
+     * Handle the User "restored" event.    
      */
     public function restored(User $user): void
     {
