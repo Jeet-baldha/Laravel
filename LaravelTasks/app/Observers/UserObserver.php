@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\SendEmailJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Email;
@@ -28,7 +29,8 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        Mail::to("jeetbaldha56@gmail.com")->send(new Email($user));
+        Mail::to("jeetbaldha56@gmail.com")->queue(new Email($user));
+
     }
 
     /**

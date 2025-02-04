@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\DataTables\UsersDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
-use DataTables;
+use \Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
-    public function index(UsersDataTable $dataTable)
+    public function index(Request $request)
     {
-        return $dataTable->render('users.index');
+        if ($request->ajax()) {
+            $data = User::select("*");
+            return DataTables::of($data)
+                ->make(true);
+        }
+
+        return view('users.index');
     }
 
     public function home()
@@ -31,13 +37,11 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
-
         ]);
 
         $user = User::create($attr);
 
         return redirect('/users')->with('success', 'New user added :' . $user->full_name);
-
     }
 
     public function edit(User $user)
