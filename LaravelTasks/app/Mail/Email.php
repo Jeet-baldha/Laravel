@@ -13,7 +13,7 @@ use App\Models\User;
 
 class Email extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
 
     /**
      * Create a new message instance.

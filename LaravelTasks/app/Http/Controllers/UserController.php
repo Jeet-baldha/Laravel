@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\UsersDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use \Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -40,6 +41,8 @@ class UserController extends Controller
         ]);
 
         $user = User::create($attr);
+
+        $token = JWTAuth::fromUser($user);
 
         return redirect('/users')->with('success', 'New user added :' . $user->full_name);
     }
