@@ -3,23 +3,22 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-
-use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 
-class Email extends Mailable
+class EmailNew extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public array $details)
+    public function __construct()
     {
-
+        //
     }
 
     /**
@@ -28,7 +27,7 @@ class Email extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User account has been deleted',
+            subject: 'Email New',
         );
     }
 
@@ -38,7 +37,7 @@ class Email extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail',
+            view: 'view.name',
         );
     }
 
