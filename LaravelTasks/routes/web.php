@@ -5,7 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [UserController::class, 'home']);
+Route::get('/', function () {
+    return "hello";
+});
+
 
 Route::middleware(Admin::class)->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -27,4 +30,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/API/v1.php';
+require __DIR__ . '/api.php';
