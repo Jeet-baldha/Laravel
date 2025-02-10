@@ -2,10 +2,10 @@
 
 namespace App\Observers;
 use App\Jobs\SendEmailJob;
-use App\Jobs\SendMail;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Email;
+
 class UserObserver
 {
     /**
