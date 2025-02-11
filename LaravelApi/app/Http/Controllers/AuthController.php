@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers;
+use App\Jobs\logJob;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -47,5 +48,9 @@ class AuthController extends Controller
         return response()->json(compact('user'));
     }
 
+    public function print()
+    {
+        logJob::dispatch(10);
+    }
 
 }

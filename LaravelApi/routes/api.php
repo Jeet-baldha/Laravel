@@ -30,11 +30,13 @@ $api->version('v2', function ($api) {
         $api->get('/', 'App\Http\Controllers\Api\v2\UserController@index');
         $api->get('users', 'App\Http\Controllers\Api\v2\UserController@show');
         $api->get('getuser', 'App\Http\Controllers\AuthController@getUser');
+
     });
 
     $api->group(['prefix' => 'auth'], function ($api) {
         $api->post('register', 'App\Http\Controllers\AuthController@register');
         $api->post('login', 'App\Http\Controllers\AuthController@login');
+        $api->get('print', 'App\Http\Controllers\AuthController@print');
     });
 
 });

@@ -13,7 +13,11 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        //
+
+        $refrence_num = $this->genrateRefrence_num();
+
+        $user->refrence_num = $refrence_num;
+        $user->save();
     }
 
     /**
@@ -53,5 +57,23 @@ class UserObserver
     public function forceDeleted(User $user): void
     {
         //
+    }
+
+
+    public function genrateRefrence_num()
+    {
+        $number = mt_rand(100000, 999999);
+
+        if ($this->refrence_numExist($number)) {
+            return $this->genrateRefrence_num();
+        }
+
+        // otherwise, it's valid and can be used
+        return $number;
+    }
+
+    public function refrence_numExist($number)
+    {
+        return User::where('refrence_num', $number)->exists();
     }
 }
