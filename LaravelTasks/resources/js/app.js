@@ -1,7 +1,12 @@
-import './bootstrap';
+// import "laravel-datatables-vite";
+// import Alpine from "alpinejs";
 
-import Alpine from 'alpinejs';
+import DataTable from "datatables.net-bs5";
+import * as Popper from "@popperjs/core";
 
-window.Alpine = Alpine;
+window.Popper = Popper;
 
-Alpine.start();
+import jQuery from "jquery";
+window.$ = jQuery;
+// window.Alpine = Alpine;
+// Alpine.start();
