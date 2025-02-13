@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
@@ -23,7 +18,7 @@
 </style>
 
 <body class="">
-    <header class="flex justify-between px-8 py-1 items-center border-b border-gray-400">
+    <!-- <header class="flex justify-between px-8 py-1 items-center border-b border-gray-400">
         <div class="flex ">
             <h1>Laravel</h1>
         </div>
@@ -49,28 +44,31 @@
                 @endauth
             </nav>
         @endif
-    </header>
+    </header> -->
+    <x-app-layout>
 
-    <div class=" px-10 pb-5">
-        <div class="py-4">
-            <a class=" text-white bg-blue-400 hover:bg-blue-500 hover:cursor-pointer font-bold px-2 py-2 rounded outline-none border-none hover:no-underline   "
-                href="/users/create">+ Add User</a>
+        <div class=" px-10 pb-5">
+            <div class="py-4">
+                <a class=" text-white bg-blue-400 hover:bg-blue-500 hover:cursor-pointer font-bold px-2 py-2 rounded outline-none border-none hover:no-underline   "
+                    href="/users/create">+ Add User</a>
+            </div>
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+
+                        <th width="50px"></th>
+                        <th width="50px"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-        <table class="table table-bordered data-table">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th width="50px"></th>
-                    <th width="50px"></th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
 
+    </x-app-layout>
     <x-flash-message></x-flash-message>
 </body>
 
@@ -85,15 +83,16 @@
                 { data: 'first_name', name: 'first_name' },
                 { data: 'last_name', name: 'last_name' },
                 { data: 'email', name: 'email' },
+
                 {
                     data: null, render: function (data, type, row) {
-                        return '<a href=' + "/users/" + row.id + "/edit" + ' class="btn btn-primary inline-block" >Edit</a> '
+                        return '<a href=' + "/users/" + row.id + "/edit" + ' class="btn btn-primary inline-block text-xs     " >Edit</a> '
                     },
                     sortable: false
                 },
                 {
                     data: null, render: function (data, type, row) {
-                        return ' <a href=' + "/users/" + row.id + "/delete" + ' class="btn btn-danger inline-block" >Delete</a>'
+                        return ' <a href=' + "/users/" + row.id + "/delete" + ' class="btn btn-danger inline-block text-xs" >Delete</a>'
                     },
                     sortable: false
                 }
